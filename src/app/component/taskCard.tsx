@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 
-const TaskCard = ({ id }) => {
+const TaskCard: React.FC<{ id: string }> = ({ id }) => {
   const [show, setShow] = useState(true);
   const handleClick = () => {
     console.log("Show Set");
