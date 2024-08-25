@@ -1,0 +1,25 @@
+{
+    "questions": [
+        {
+            "question": "Your Name",
+            "type": "text"
+        },
+        {
+            "question": "Phone Number",
+            "type": "text"
+        },
+        {
+            "question": "Address",
+            "type": "text"
+        },
+        {
+            "question": "Order Type",
+            "type": "select",
+            "option": ["Instant", "Next Day Delivery", "Standard Delivery"]
+        },
+        {
+            "question": "Provide details of the product",
+            "type": "textarea"
+        }
+    ]
+}
