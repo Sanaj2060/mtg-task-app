@@ -18,9 +18,9 @@ export const options: NextAuthOptions = {
             const userEmail = session.user?.email;
             if (userEmail && !session.dbUser) {
                 const dbUser = await getUser(userEmail);
-                console.log(dbUser);
+                // console.log(dbUser);
                 session.dbUser = dbUser;
-                console.log(session.dbUser?.id)
+                // console.log(session.dbUser?.id)
             }
             return session
         }
