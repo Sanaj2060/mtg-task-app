@@ -28,7 +28,7 @@ export default function LoginPage() {
       <div className="flex flex-col items-center justify-center shadow-md p-10 gap-6 rounded bg-white">
         <h1>Login to your account</h1>
         <div
-          className="flex border-2 border-sky-500 gap-5 rounded-full p-3 items center hover:bg-black hover:text-white"
+          className="flex border-2 border-sky-500 gap-5 rounded-full p-3 items center hover:bg-black hover:text-white hover:cursor-pointer"
           onClick={handleLogin}
         >
           {/* <img src="https://authjs.dev/img/providers/google.svg" width="30px" /> */}
