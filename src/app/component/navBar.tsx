@@ -32,6 +32,7 @@ const NavBar = (props: Session) => {
           height={0}
           sizes="100vw"
           alt={`profile photo of ${props.user?.name}`}
+          onClick={handleDropdownToggle}
         />
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
