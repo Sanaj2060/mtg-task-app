@@ -19,11 +19,19 @@ const NavBar = (props: Session) => {
     <div className="p-4 flex justify-between w-full">
       <div className="text-lg font-semibold">MTGTODO</div>
       <div>
-        <img 
+        {/* <img 
           src={props.user?.image ? props.user.image : "../../public/next.svg"}
           className="max-h-36 rounded-full w-9"
           alt={`profile photo of ${props.user?.name}`}
           onClick={handleDropdownToggle}
+        /> */}
+        <Image 
+          src={props.user?.image ? props.user.image : "/next.svg"}
+          className="max-h-36 rounded-full w-9"
+          width={0}
+          height={0}
+          sizes="100vw"
+          alt={`profile photo of ${props.user?.name}`}
         />
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
