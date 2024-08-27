@@ -26,7 +26,7 @@ export async function getAllTasks(id: string): Promise<AllTask | null> {
 
 export async function getAllTasksWithUserName(id: string): Promise<AllTasksWithUsers | null> {
     try{
-        const result: QueryResult<TasksWithUsers> = await sql<TasksWithUsers>`SELECT T.*, U.EMAIL as createdByEmail, U.FULLNAME as createdByName, U.googlepic as createdByPic FROM TASKS T JOIN DBUSERS U ON T.CREATEDBY = U.ID;`;
+        const result: QueryResult<TasksWithUsers> = await sql<TasksWithUsers>`SELECT T.*, U.EMAIL as createdByEmail, U.FULLNAME as createdByName, U.googlepic as createdByPic FROM TASKS T JOIN DBUSERS U ON T.CREATEDBY = U.ID WHERE T.createdby = ${id};`;
         console.log(result.rows)
         return { tasks: result.rows } || null;
     } catch (err) {
