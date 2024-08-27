@@ -6,6 +6,7 @@ import { options } from "./api/auth/[...nextauth]/auth";
 import Register from "./auth/register/page";
 import { getAllTasks, getAllTasksWithUserName } from "./api/lib/db";
 import Image from "next/image";
+import TaskCardWrapper from "./component/taskCardWrapper";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -27,12 +28,20 @@ export default async function Home() {
         <h2>Active Tasks for {session.dbUser?.fullname}</h2>
       </div>
       <div className="flex flex-col justify-center items-left mt-8 px-10">
+        <TaskCardWrapper id={session.dbUser?.id} />
         <TaskCard id="1" />
         <TaskCard id="2" />
         <TaskCard id="3" />
         <TaskCard id="4" />
         <div className="flex flex-col justify-center items-center m-8 px-10">
           {tasks?.tasks.map((task) => {
+            const today = new Date().getTime()
+            const duedatec = task.duedate ? task.duedate?.getTime() : 0
+            console.log(today, duedatec)
+            let timeDiff = duedatec - today
+            const dayDiff = Math.floor(timeDiff/(1000*60*60*24))
+            console.log(dayDiff)
+
             return (
               <div key={task.id} className="flex bg-yellow-300 m-2 p-6 justify-between w-full">
                 <div>
@@ -40,6 +49,7 @@ export default async function Home() {
                   <p>Task Assignee ID: {task.assignee}</p>
                   <p>Task Created By: {task.createdbyname}</p>
                   <p>Task Created By Email: {task.createdbyemail}</p>
+                  <p>Task Due Date: {task.duedate?.toDateString()}</p>
                 </div>
                 <div>
                   <Image
