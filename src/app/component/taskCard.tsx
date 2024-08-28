@@ -2,8 +2,9 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { FormatRelativeDate } from "../api/lib/dateAsDay";
 
-const TaskCard: React.FC<{ id: string }> = ({ id }) => {
+const TaskCard: React.FC<{ id: string, duedate: Date }> = ({ id, duedate }) => {
   const [show, setShow] = useState(true);
   const handleClick = () => {
     console.log("Show Set");
@@ -52,7 +53,7 @@ const TaskCard: React.FC<{ id: string }> = ({ id }) => {
                   className="block w-4 h-4 text-green-500 mr-2"
                   alt="calendar"
                 />
-                <p className="text-sm text-green-500">Today</p>
+                <p className="text-sm text-green-500">{duedate ? FormatRelativeDate(duedate) : "No Due Date" }</p>
               </div>
             </div>
           </div>

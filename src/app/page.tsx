@@ -29,10 +29,6 @@ export default async function Home() {
       </div>
       <div className="flex flex-col justify-center items-left mt-8 px-10">
         <TaskCardWrapper id={session.dbUser?.id} />
-        <TaskCard id="1" />
-        <TaskCard id="2" />
-        <TaskCard id="3" />
-        <TaskCard id="4" />
         <div className="flex flex-col justify-center items-center m-8 px-10">
           {tasks?.tasks.map((task) => {
             const today = new Date().getTime()
