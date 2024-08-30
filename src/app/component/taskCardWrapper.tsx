@@ -4,8 +4,8 @@ import TaskCard from "./taskCard";
 
 export default async function TaskCardWrapper({id}: any){
     const tasks = await getAllTasksWithUserName(id);
-    console.log(id)
-    console.log(tasks)
+    // console.log(id)
+    // console.log(tasks)
     return (
         <div>
             {tasks?.tasks.map((task, key) =>
