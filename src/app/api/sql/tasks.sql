@@ -14,7 +14,7 @@ VALUES (
     'Task Title - 3', 
     '00d9c4e9-9609-4d77-aaaf-0a44c7257cfa', 
     '00d9c4e9-9609-4d77-aaaf-0a44c7257cfa', 
-    '2024-08-27 14:00:00', 
+    '2024-08-31 14:00:00', 
     'In Progress', 
     '{"key1": "value1", "key2": "value2"}'::jsonb
 );

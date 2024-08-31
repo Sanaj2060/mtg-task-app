@@ -4,17 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useSession } from "next-auth/react";
 
 // interface RegisterProps {
 //   sessionEmail: string;
 // }
 
-const Register = (props: any) => {
+const Register = () => {
+  const {data: session, status} = useSession();
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState(props.user?.email);
+  const [email, setEmail] = useState(session?.user?.email);
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [googlepic, setGooglPic] = useState(props.user?.image);
+  const [googlepic, setGooglPic] = useState(session?.user?.image);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -77,7 +79,7 @@ const Register = (props: any) => {
           <input
             id="email"
             type="email"
-            value={props.user?.email || ""}
+            value={session?.user?.email || ""}
             className="border p-2 w-full"
             required
             readOnly

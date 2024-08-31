@@ -6,6 +6,7 @@ import Register from "./auth/register/page";
 import TaskCardWrapper from "./component/taskCardWrapper";
 
 export default async function Home() {
+  // const {data: session, status} = getSession();
   const session = await getServerSession(options);
   if (!session) {
     redirect("/auth/login?callback=/");
@@ -13,13 +14,13 @@ export default async function Home() {
   const userEmail = session.user?.email;
   const dbUser = session?.dbUser;
   if (userEmail && !dbUser) {
-    return <Register {...session} />;
+    return <Register />;
   }
 
   return (
     <main className="w-full flex flex-col items-center min-h-screen">
       <div className="w-full lg:w-5/6">
-        <NavBar {...session} />
+        <NavBar />
         <div className="px-4">
           <div className="text-2xl font-bold ">
             <h2>Active Tasks for {session.dbUser?.fullname}</h2>
