@@ -1,13 +1,14 @@
 "use client";
 import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { VscSignOut } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
 
-const NavBar = (props: Session) => {
+const NavBar = () => {
+  const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -42,12 +43,12 @@ const NavBar = (props: Session) => {
       <div className="text-lg font-semibold">MTGTODO</div>
       <div ref={dropdownRef} className="relative">
         <Image
-          src={props.user?.image ? props.user.image : "/next.svg"}
+          src={session?.user?.image ? session?.user.image : "/next.svg"}
           className="max-h-36 rounded-full w-9"
           width={0}
           height={0}
           sizes="100vw"
-          alt={`profile photo of ${props.user?.name}`}
+          alt={`profile photo of ${session?.user?.name}`}
           onClick={handleDropdownToggle}
         />
         {isDropdownOpen && (
@@ -55,18 +56,18 @@ const NavBar = (props: Session) => {
             <div className="flex gap-6">
               <div className="mb-2">
                 <Image
-                  src={props.user?.image ? props.user.image : "/next.svg"}
+                  src={session?.user?.image ? session?.user.image : "/next.svg"}
                   className="max-h-36 rounded-full w-[60px]"
                   width={0}
                   height={0}
                   sizes="100vw"
-                  alt={`profile photo of ${props.user?.name}`}
+                  alt={`profile photo of ${session?.user?.name}`}
                   onClick={handleDropdownToggle}
                 />
               </div>
               <div className="flex flex-col items-start justify-start">
-                <p>{props.user?.name}</p>
-                <p className="text-xs text-gray-500">{props.user?.email}</p>
+                <p>{session?.user?.name}</p>
+                <p className="text-xs text-gray-500">{session?.user?.email}</p>
               </div>
             </div>
             <div className="w-full flex flex-col items-start">

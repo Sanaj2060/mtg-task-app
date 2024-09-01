@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import NavBar from "../component/navBar";
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/auth";
 import TextInput from "../component/textInput";
+import NavBar from "../component/navBar";
+import { useSession } from "next-auth/react";
 
 const Page = () => {
+  const {data: session, status} = useSession();
   const [showEditProfile, setShowEditProfile] = useState(false);
 
   return (
     <div className="flex flex-col w-full min-h-screen items-center">
       <div className="w-full lg:w-5/6">
-        <div className="bg-green-400 w-full h-10">Navbar Here</div>
+        <NavBar />
         <div className="px-4">
           <p>Profile</p>
           <p>Full Name</p>

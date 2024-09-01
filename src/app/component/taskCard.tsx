@@ -31,7 +31,6 @@ const TaskCard: React.FC<{ id: string, duedate: Date }> = ({ id, duedate }) => {
                   className="block w-4 h-4 text-green-500 mr-2"
                   alt="calendar"
                 />
-                {/* <p className="text-sm {}">{relativeDate.dateText}</p> */}
                 <p className={relativeDate.textColor}>{relativeDate.dateText}</p>
               </div>
             </div>
