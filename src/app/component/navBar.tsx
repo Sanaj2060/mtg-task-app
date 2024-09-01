@@ -40,11 +40,14 @@ const NavBar = () => {
 
   return (
     <div className="p-4 flex justify-between w-full">
-      <div className="text-lg font-semibold">MTGTODO</div>
+      <Link href="./">
+        <div className="text-lg font-semibold">MTGTODO</div>
+      </Link>
+
       <div ref={dropdownRef} className="relative">
         <Image
           src={session?.user?.image ? session?.user.image : "/next.svg"}
-          className="max-h-36 rounded-full w-9"
+          className="max-h-36 rounded-full w-9 cursor-pointer"
           width={0}
           height={0}
           sizes="100vw"
