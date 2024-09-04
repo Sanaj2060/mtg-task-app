@@ -2,21 +2,23 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { useSession } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 // interface RegisterProps {
 //   sessionEmail: string;
 // }
 
 const Register = () => {
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState(session?.user?.email);
+  const email = session?.user?.email;
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [googlepic, setGooglPic] = useState(session?.user?.image);
+  const googlepic = session?.user?.image;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -89,10 +91,11 @@ const Register = () => {
           <label className="block mb-1" htmlFor="phone">
             Mobile Number
           </label>
-            <PhoneInput country={'in'}
-                value={phone}
-                onChange={(e) => setPhone(e)}
-            />
+          <PhoneInput
+            country={"in"}
+            value={phone}
+            onChange={(e) => setPhone(e)}
+          />
         </div>
         <div>
           <label className="block mb-1" htmlFor="address">
@@ -112,7 +115,10 @@ const Register = () => {
           className="bg-blue-500 text-white p-2 rounded"
           disabled={isLoading}
         >
-          {isLoading ? "Registering..." : "Register"}
+          {isLoading ? (
+            <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+          ) : null}
+          {isLoading ? 'Submitting...' : 'Submit'}
         </button>
       </form>
     </div>

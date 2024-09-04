@@ -1,5 +1,5 @@
 import { QueryResult, sql } from "@vercel/postgres";
-import { dbUser, Task, AllTask, TasksWithUsers, AllTasksWithUsers } from "./definitions";
+import { dbUser, Task, AllTask, TasksWithUsers, AllTasksWithUsers, AllFormByUser, FormByUserWithUser } from "./definitions";
 
 export async function getUser(email: string): Promise<dbUser | null> {
     // console.log("Get User is Called!")
@@ -31,5 +31,15 @@ export async function getAllTasksWithUserName(id: string): Promise<AllTasksWithU
         return { tasks: result.rows } || null;
     } catch (err) {
         return null
+    }
+}
+
+export async function getFormByUserID(id: string): Promise<AllFormByUser | null> {
+    try {
+        const result: QueryResult<FormByUserWithUser> = await sql<FormByUserWithUser>`SELECT F.*, U.EMAIL as createdByEmail, U.FULLNAME as createdByName, U.googlepic as createdByPic FROM formbyuser F JOIN DBUSERS U ON F.CREATEDBY = U.ID WHERE F.createdby = ${id} order by F.title asc;`;
+        console.log(result.rows)
+        return {forms: result.rows} || null;
+    } catch (err) {
+        return null;
     }
 }

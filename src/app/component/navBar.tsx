@@ -11,7 +11,7 @@ const NavBar = () => {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  console.log(status)
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
