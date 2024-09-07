@@ -2,6 +2,7 @@ import { options } from "@/app/api/auth/[...nextauth]/auth";
 import { getFormByUserID } from "@/app/api/lib/db";
 import { getServerSession } from "next-auth";
 import React from "react";
+import Image from "next/image";
 
 export default async function Page() {
   const session = await getServerSession(options);
@@ -10,7 +11,7 @@ export default async function Page() {
   if (!session || !session.dbUser?.id) {
     return (
       <div>
-        <p>No User ID found. Please make sure you're authenticated.</p>
+        <p>No User ID found. Please make sure you`&apos;`re authenticated.</p>
       </div>
     );
   }
@@ -39,8 +40,10 @@ export default async function Page() {
 
               {/* Creator Info */}
               <div className="flex items-center mb-6">
-                <img
+                <Image
                   src={form.createdbypic}
+                  width={30}
+                  height={30}
                   alt={form.createdbyname}
                   className="w-12 h-12 rounded-full mr-4"
                 />
