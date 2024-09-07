@@ -18,11 +18,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(options)
+  const session = await getServerSession(options);
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <SessionProviderWrapper session={session}>{children}</SessionProviderWrapper>
+        <SessionProviderWrapper session={session}>
+          {children}
+        </SessionProviderWrapper>
       </body>
     </html>
   );

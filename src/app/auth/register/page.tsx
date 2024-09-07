@@ -57,70 +57,71 @@ const Register = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-1" htmlFor="fullName">
-            Full Name
-          </label>
-          <input
-            id="fullName"
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="border p-2 w-full"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1" htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={session?.user?.email || ""}
-            className="border p-2 w-full"
-            required
-            readOnly
-          />
-        </div>
-        <div>
-          <label className="block mb-1" htmlFor="phone">
-            Mobile Number
-          </label>
-          <PhoneInput
-            country={"in"}
-            value={phone}
-            onChange={(e) => setPhone(e)}
-          />
-        </div>
-        <div>
-          <label className="block mb-1" htmlFor="address">
-            Address
-          </label>
-          <input
-            id="address"
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="border p-2 w-full"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded"
-          disabled={isLoading}
-        >
-          {isLoading ? (
+    <div className="container mx-auto flex items-center justify-center lg:w-5/6 h-screen">
+      <div className="p-6 shadow-lg rounded md:w-[400px]">
+        <h1 className="text-2xl font-bold mb-4 text-center">Register</h1>
+        {error && <p className="text-red-500">{error}</p>}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block mb-1" htmlFor="fullName">
+              Full Name
+            </label>
+            <input
+              id="fullName"
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              className="border p-2 w-full rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="block mb-1" htmlFor="email">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={session?.user?.email || ""}
+              className="border p-2 w-full rounded"
+              required
+              readOnly
+            />
+          </div>
+          <div>
+            <label className="block mb-1 w-full">Mobile Number</label>
+
+            <PhoneInput
+              country={"in"}
+              value={phone}
+              onChange={(e) => setPhone(e)}
+            />
+          </div>
+          <div>
+            <label className="block mb-1" htmlFor="address">
+              Address
+            </label>
+            <input
+              id="address"
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="border p-2 w-full rounded"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded w-full"
+            disabled={isLoading}
+          >
+            {isLoading ? (
             <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
           ) : null}
           {isLoading ? 'Submitting...' : 'Submit'}
-        </button>
-      </form>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

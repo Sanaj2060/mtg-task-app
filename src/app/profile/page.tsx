@@ -5,25 +5,97 @@ import NavBar from "../component/navBar";
 import { useSession } from "next-auth/react";
 
 const Page = () => {
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const [showEditProfile, setShowEditProfile] = useState(false);
 
   return (
     <div className="flex flex-col w-full min-h-screen items-center">
       <div className="w-full lg:w-5/6">
         <NavBar />
-        <div className="px-4">
-          <p>Profile</p>
-          <p>Full Name</p>
-          <p>Email address</p>
-          <p>Mobile number</p>
-          <p>Address</p>
-          <button
-            className="bg-orange-500 text-white rounded p-2"
-            onClick={() => setShowEditProfile((prev) => !prev)}
-          >
-            Edit profile
-          </button>
+        <div className="lg:flex px-4 gap-4 mt-4">
+          <div className="flex flex-col flex-3 justify-start items-center gap-3 p-4 rounded shadow-lg min-h-full">
+            <img
+              src={session?.dbUser?.googlepic}
+              alt=""
+              className="rounded-full"
+            />
+            <div className="flex flex-col gap-1 items-center justify-center">
+              <p>{session?.dbUser?.fullname}</p>
+              <p className="text-sm text-gray-500">{session?.dbUser?.email}</p>
+              <button
+                className="text-white rounded p-2 w-full mt-3 bg-orange-400 hover:bg-orange-500"
+                onClick={() => setShowEditProfile((prev) => !prev)}
+              >
+                Edit profile
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-col p-5 rounded shadow-lg h-full flex-1 mt-10 lg:mt-0">
+            <p className="text-blue-500 text-lg mb-4">Personal Details</p>
+
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                Full name
+              </label>
+              <input
+                disabled
+                type="text"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder="John"
+                value={session?.dbUser?.fullname}
+              />
+            </div>
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                Email address
+              </label>
+              <input
+                disabled
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder="John"
+                value={session?.dbUser?.email}
+              />
+            </div>
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                Address
+              </label>
+              <input
+                disabled
+                type="text"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder="John"
+                value={session?.dbUser?.address}
+              />
+            </div>
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                Mobile number
+              </label>
+              <input
+                disabled
+                type="text"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder="John"
+                value={session?.dbUser?.phone}
+              />
+            </div>
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                User ID
+              </label>
+              <input
+                disabled
+                type="text"
+                id="first_name"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder="John"
+                value={session?.dbUser?.id}
+              />
+            </div>
+          </div>
         </div>
         {/* dialog */}
         {showEditProfile && (
@@ -64,28 +136,26 @@ const Page = () => {
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
-                        <h3
-                          className="text-base font-semibold leading-6 text-gray-900"
-                          id="modal-title"
-                        >
+                        <h3 className="text-base font-semibold leading-6 text-gray-900">
                           Edit your profile
                         </h3>
                         <div className="mt-2">
                           <TextInput
                             labelName="Full name"
-                            defVal="Angom Oson Singh"
+                            defVal={session?.dbUser?.fullname}
                           />
-                          <TextInput
+                          {/* <TextInput
                             labelName="Email address"
-                            defVal="angomosn64@gmail.com"
-                          />
+                            defVal={session?.dbUser?.email}
+                            disabled={true}
+                          /> */}
                           <TextInput
                             labelName="Mobile number"
-                            defVal="7085535842"
+                            defVal={session?.dbUser?.phone}
                           />
                           <TextInput
                             labelName="Address"
-                            defVal="Angom Oson Singh"
+                            defVal={session?.dbUser?.address}
                           />
                         </div>
                       </div>

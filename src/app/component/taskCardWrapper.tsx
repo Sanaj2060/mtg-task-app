@@ -10,9 +10,9 @@ export default async function TaskCardWrapper({ id }: any) {
     <div>
       {tasks?.tasks.map((task, key) =>
         task.duedate ? (
-          <TaskCard key={task.id} id={task.id} duedate={task.duedate} />
+          <TaskCard key={task.id} id={task.title} duedate={task.duedate} />
         ) : (
-          <TaskCard key={task.id} id={task.id} duedate={new Date()} />
+          <TaskCard key={task.id} id={task.title} duedate={new Date()} />
         )
       )}
     </div>
