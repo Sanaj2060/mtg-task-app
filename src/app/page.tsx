@@ -1,9 +1,12 @@
+export const revalidate = 0; //disable cached to fetch fresh data everytime
 import NavBar from "./component/navBar";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { options } from "./api/auth/[...nextauth]/auth";
 import Register from "./auth/register/page";
 import TaskCardWrapper from "./component/taskCardWrapper";
+import NewTaskBtn from "./component/newTaskBtn";
+import { ViewCreatedTaskBtn } from "./component/newTaskBtn";
 
 export default async function Home() {
   // const {data: session, status} = getSession();
@@ -22,11 +25,15 @@ export default async function Home() {
       <div className="w-full lg:w-5/6">
         <NavBar />
         <div className="px-4">
+          <NewTaskBtn />
+          <ViewCreatedTaskBtn />
           <div className="text-2xl font-bold ">
-            <h2>Active Tasks for {session.dbUser?.fullname}</h2>
+            <h4>Tasks for {session.dbUser?.fullname}</h4>
           </div>
           <div className="flex flex-col justify-center items-left mt-8">
-            <TaskCardWrapper id={session.dbUser?.id} />
+          {/* <TaskfilterWrapper /> */}
+          <hr className="mb-3"/>
+            <TaskCardWrapper id={session.dbUser?.id} where={"home"} />
           </div>
         </div>
       </div>

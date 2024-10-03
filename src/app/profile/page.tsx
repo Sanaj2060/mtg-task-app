@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TextInput from "../component/textInput";
 import NavBar from "../component/navBar";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Page = () => {
   const { data: session, status } = useSession();
@@ -14,8 +15,10 @@ const Page = () => {
         <NavBar />
         <div className="lg:flex px-4 gap-4 mt-4">
           <div className="flex flex-col flex-3 justify-start items-center gap-3 p-4 rounded shadow-lg min-h-full">
-            <img
-              src={session?.dbUser?.googlepic}
+            <Image
+              height={100}
+              width={100}
+              src={session?.dbUser?.googlepic.slice(0, -6) || ""}
               alt=""
               className="rounded-full"
             />
@@ -41,7 +44,7 @@ const Page = () => {
                 disabled
                 type="text"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
-                placeholder="John"
+                placeholder=""
                 value={session?.dbUser?.fullname}
               />
             </div>
@@ -52,9 +55,9 @@ const Page = () => {
               <input
                 disabled
                 type="text"
-                id="first_name"
+                id="email"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
-                placeholder="John"
+                placeholder=""
                 value={session?.dbUser?.email}
               />
             </div>
@@ -66,7 +69,7 @@ const Page = () => {
                 disabled
                 type="text"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
-                placeholder="John"
+                placeholder=""
                 value={session?.dbUser?.address}
               />
             </div>
@@ -78,7 +81,7 @@ const Page = () => {
                 disabled
                 type="text"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
-                placeholder="John"
+                placeholder=""
                 value={session?.dbUser?.phone}
               />
             </div>
@@ -89,10 +92,23 @@ const Page = () => {
               <input
                 disabled
                 type="text"
-                id="first_name"
+                id="userid"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
-                placeholder="John"
+                placeholder=""
                 value={session?.dbUser?.id}
+              />
+            </div>
+            <div className="w-full mb-5">
+              <label className="block text-left pl-2 w-full mb-2 text-sm font-medium text-gray-900">
+                Joined on
+              </label>
+              <input
+                disabled
+                type="text"
+                id="joinedon"
+                className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
+                placeholder=""
+                value={session?.dbUser?.joinOn ? session.dbUser.joinOn.toDateString() : 'None'}
               />
             </div>
           </div>

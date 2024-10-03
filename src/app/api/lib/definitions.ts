@@ -32,3 +32,23 @@ export type TasksWithUsers = Task & {
 export type AllTasksWithUsers = {
   tasks: TasksWithUsers[];
 };
+
+export type FormByUser = {
+  id: string;
+  createdby: string;
+  title: string;
+  description: string;
+  active: boolean;
+  formdata?: Record<string, any> | null;
+  createdon: Date;
+}
+
+export type FormByUserWithUser = FormByUser & {
+  createdbyname: string;
+  createdbyemail: string;
+  createdbypic: string;
+}
+
+export type AllFormByUser = {
+  forms: FormByUserWithUser[];
+}

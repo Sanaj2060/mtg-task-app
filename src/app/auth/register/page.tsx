@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useSession } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 // interface RegisterProps {
 //   sessionEmail: string;
@@ -13,10 +15,10 @@ import { useSession } from "next-auth/react";
 const Register = () => {
   const { data: session, status } = useSession();
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState(session?.user?.email);
+  const email = session?.user?.email;
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [googlepic, setGooglPic] = useState(session?.user?.image);
+  const googlepic = session?.user?.image;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -113,7 +115,10 @@ const Register = () => {
             className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded w-full"
             disabled={isLoading}
           >
-            {isLoading ? "Registering..." : "Register"}
+            {isLoading ? (
+            <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+          ) : null}
+          {isLoading ? 'Submitting...' : 'Submit'}
           </button>
         </form>
       </div>
