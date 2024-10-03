@@ -37,6 +37,7 @@ export type FormByUser = {
   id: string;
   createdby: string;
   title: string;
+  description: string;
   active: boolean;
   formdata?: Record<string, any> | null;
   createdon: Date;

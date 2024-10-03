@@ -3,12 +3,12 @@ import { sql } from '@vercel/postgres';
 
 export async function POST(request: Request) {
   try {
-    const { title, questions, createdby }: { title: string; questions: any[]; createdby: string } = await request.json();
+    const { title, description, questions, createdby }: { title: string; description: string; questions: any[]; createdby: string } = await request.json();
 
     // Insert the form data into the database
     const result = await sql`
-      INSERT INTO formbyuser (createdby, title, formdata, active)
-      VALUES (${createdby}, ${title}, ${JSON.stringify({ questions })}, TRUE)
+      INSERT INTO formbyuser (createdby, title, description, formdata, active)
+      VALUES (${createdby}, ${title}, ${description}, ${JSON.stringify({ questions })}, TRUE)
       RETURNING *;
     `;
 

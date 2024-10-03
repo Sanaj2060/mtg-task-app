@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 // Define the shape of a user object
@@ -11,6 +12,7 @@ type User = {
 const UserSearch = () => {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState<User[]>([]); // Explicitly type the users array
+  const router = useRouter();
 
   useEffect(() => {
     if (query.length > 0) {
@@ -42,11 +44,11 @@ const UserSearch = () => {
 
   const handleUserClick = (user: User) => {
     console.log("User clicked:", user.email, user.name);
-    // You can also perform additional actions here, such as navigating to a user detail page or updating state
+    router.push(`/form/select-form?by=${user.id}`);
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
+    <div className="p-4">
       <input
         type="text"
         placeholder="Search by name or email"
@@ -65,6 +67,9 @@ const UserSearch = () => {
           </li>
         ))}
       </ul>
+      <div>
+        <p>Hard coded business</p>
+      </div>
     </div>
   );
 };

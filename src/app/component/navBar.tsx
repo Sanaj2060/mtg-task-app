@@ -40,7 +40,7 @@ const NavBar = () => {
 
   return (
     <div className="p-4 flex justify-between w-full">
-      <Link href="./">
+      <Link href="/">
         <div className="text-lg font-semibold">MTGTODO</div>
       </Link>
 
