@@ -6,12 +6,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { VscSignOut } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  console.log(status);
+  const pathname = usePathname();
+
+  // List of paths where NavBar should be empty
+  const excludedPaths = ["/auth/login", "/auth/register"];
+
+  // If the current pathname is in the excluded paths, return an empty NavBar
+  if (excludedPaths.includes(pathname)) {
+    return null;
+  }
+
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
