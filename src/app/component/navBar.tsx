@@ -49,9 +49,14 @@ const NavBar = () => {
   };
 
   return (
-    <div className="p-4 flex justify-between w-full px-4 md:px-20">
+    <div className="p-4 flex justify-between w-full px-4 md:px-20 shadow-sm">
       <Link href="/">
-        <div className="text-lg font-semibold">MTGTODO</div>
+        <div
+          className={`text-3xl font-bold italic`}
+          style={{ color: "#025200" }}
+        >
+          mateng
+        </div>
       </Link>
 
       <div ref={dropdownRef} className="relative">
