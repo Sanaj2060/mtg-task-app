@@ -1,5 +1,6 @@
 CREATE TABLE tasks (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    formid UUID REFERENCES formbyuser(id) ON DELETE SET NULL,
     title TEXT NOT NULL,
     createdBy UUID REFERENCES dbusers(id) ON DELETE SET NULL,
     assignee UUID REFERENCES dbusers(id) ON DELETE SET NULL,

@@ -12,7 +12,7 @@ const Page = () => {
   return (
     <div className="flex flex-col w-full min-h-screen items-center">
       <div className="w-full lg:w-5/6">
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="lg:flex px-4 gap-4 mt-4">
           <div className="flex flex-col flex-3 justify-start items-center gap-3 p-4 rounded shadow-lg min-h-full">
             <Image

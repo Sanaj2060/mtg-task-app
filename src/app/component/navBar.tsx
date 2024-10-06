@@ -11,7 +11,7 @@ const NavBar = () => {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  console.log(status)
+  console.log(status);
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
@@ -39,7 +39,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="p-4 flex justify-between w-full">
+    <div className="p-4 flex justify-between w-full px-4 md:px-20">
       <Link href="/">
         <div className="text-lg font-semibold">MTGTODO</div>
       </Link>

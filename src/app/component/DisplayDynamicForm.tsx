@@ -9,6 +9,9 @@ interface DynamicFormProps {
 }
 
 const DisplayDynamicForm: React.FC<DynamicFormProps> = ({ formData }) => {
+  console.log("Param")
+  console.log(formData)
+  console.log("End of Param")
   const { data: session } = useSession(); // Fetch session data
   const [taskTitle, setTaskTitle] = useState<string>(""); // To track the task title for success message
   const [isSubmitted, setIsSubmitted] = useState(false); // To control the success popup
@@ -16,6 +19,7 @@ const DisplayDynamicForm: React.FC<DynamicFormProps> = ({ formData }) => {
   const [loading, setLoading] = useState(false); // To manage the loading state
   const [minDate, setMinDate] = useState<string>(""); // For disabling past dates
   const router = useRouter(); // Next.js router for navigation
+  const formid = formData.id;
 
   // Calculate the current date and time for the min attribute
   useEffect(() => {
@@ -33,6 +37,7 @@ const DisplayDynamicForm: React.FC<DynamicFormProps> = ({ formData }) => {
 
     // Create the payload
     const payload = {
+      formid,
       title,
       createdBy: session?.dbUser?.id?.toString() || "",
       assignee: formData.get("assignedTo")?.toString(),
@@ -62,7 +67,9 @@ const DisplayDynamicForm: React.FC<DynamicFormProps> = ({ formData }) => {
       setErrorMessage(null); // Clear any previous error message
     } catch (error: any) {
       console.error("Error submitting task:", error);
-      setErrorMessage(error.message || "An unexpected error occurred. Please try again.");
+      setErrorMessage(
+        error.message || "An unexpected error occurred. Please try again."
+      );
     } finally {
       setLoading(false); // Stop loading after submission
     }
@@ -172,7 +179,8 @@ const DisplayDynamicForm: React.FC<DynamicFormProps> = ({ formData }) => {
             <h2 className="text-xl font-bold mb-4 text-red-500">Error</h2>
             <p className="mb-4">{errorMessage}</p>
             <p className="mb-4">
-              Please review the form and try again. Ensure that all required fields are filled in correctly.
+              Please review the form and try again. Ensure that all required
+              fields are filled in correctly.
             </p>
             <button
               className="bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

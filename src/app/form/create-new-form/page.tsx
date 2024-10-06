@@ -5,7 +5,7 @@ import { faTrash, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import NavBar from "@/app/component/navBar";
 
-type QuestionType = "text" | "textarea" | "select" | "date";
+type QuestionType = "text" | "textarea" | "select" | "date" | "phone";
 
 interface Question {
   question: string;
@@ -107,7 +107,7 @@ const Form = () => {
 
   return (
     <main className="w-full flex flex-col items-center min-h-screen">
-      <NavBar />
+      {/* <NavBar /> */}
       <form
         onSubmit={handleSubmit}
         className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
@@ -174,6 +174,7 @@ const Form = () => {
                 <option value="textarea">Textarea</option>
                 <option value="select">Select</option>
                 <option value="date">Date</option>
+                <option value="phone">Phone</option>
               </select>
               <FontAwesomeIcon
                 icon={faTrash}

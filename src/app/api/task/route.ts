@@ -5,10 +5,10 @@ import { sql } from '@vercel/postgres'; // Your database connection
 export async function POST(request: Request) {
   try {
     const body = await request.json(); // Parse the incoming JSON body
-    const { title, createdBy, assignee, dueDate, formData } = body;
+    const { formid, title, createdBy, assignee, dueDate, formData } = body;
 
     // Validate the required fields
-    if (!title || !createdBy || !assignee || !dueDate || !formData) {
+    if (!formid || !title || !createdBy || !assignee || !dueDate || !formData) {
       return NextResponse.json(
         { message: 'Missing required fields' },
         { status: 400 }
@@ -18,8 +18,8 @@ export async function POST(request: Request) {
     console.log("Inserting into the database");
     // Insert the task into the database
     const result = await sql`
-      INSERT INTO tasks (title, createdBy, assignee, dueDate, formData, status)
-      VALUES (${title}, ${createdBy}, ${assignee}, ${dueDate}, ${formData}, 'Not Started')
+      INSERT INTO tasks (formid, title, createdBy, assignee, dueDate, formData, status)
+      VALUES (${formid}, ${title}, ${createdBy}, ${assignee}, ${dueDate}, ${formData}, 'Not Started')
       RETURNING *;
     `;
     console.log("Database insert result:", result);
