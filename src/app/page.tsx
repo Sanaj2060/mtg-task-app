@@ -25,7 +25,7 @@ export default async function Home() {
       <div className="w-full lg:w-5/6">
         {/* <NavBar /> */}
         <div className="px-4">
-          <div className="flex flex-row flex-wrap gap-3">
+          <div className="flex flex-row flex-wrap gap-3 justify-center">
             <NewTaskBtn />
             <ViewCreatedTaskBtn />
             <CreateNewForm />
