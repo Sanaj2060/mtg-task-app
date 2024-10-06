@@ -27,6 +27,13 @@ export type TasksWithUsers = Task & {
   createdbyname: string;
   createdbyemail: string;
   createdbypic: string;
+  fromform?: {
+    questions: {
+      type: string; // e.g., 'text', 'select', 'date'
+      options: string[]; // for select type, an array of possible options
+      question: string; // The question text
+    }[];
+  } | null;
 };
 
 export type AllTasksWithUsers = {

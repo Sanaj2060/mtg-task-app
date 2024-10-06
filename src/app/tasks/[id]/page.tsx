@@ -34,6 +34,7 @@ const TaskDetails: React.FC = () => {
             taskData.createdon = new Date(taskData.createdon);
           }
           setTask(taskData);
+          console.log(taskData);
         } else {
           console.error("Failed to fetch task:", await response.json());
         }
@@ -146,63 +147,28 @@ const TaskDetails: React.FC = () => {
           </div>
         </div>
 
-        {/* Displaying formdata as input fields if available */}
-        {task.formdata && (
+        {/* Displaying questions from fromform and looking up answers in formdata */}
+        {task.fromform?.questions && (
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">
-              Form Data
-            </h3>
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(task.formdata)
-                .filter(
-                  ([key, value]) =>
-                    ![
-                      "title",
-                      "duedate",
-                      "assignedTo",
-                      "taskcreatedby",
-                      "assignedToName",
-                    ].includes(key) && value !== ""
-                ) // Exclude specific keys and empty values
-                .map(([key, value]) => (
-                  <div key={key}>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {key}
-                    </label>
-                    <input
-                      type="text"
-                      value={value}
-                      readOnly
-                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700"
-                    />
-                  </div>
-                ))}
-            </div> */}
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">Form Data</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.keys(task.formdata ?? {}) // Use a fallback empty object if formdata is null or undefined
-                .filter(
-                  (key) =>
-                    ![
-                      "title",
-                      "duedate",
-                      "assignedTo",
-                      "taskcreatedby",
-                      "assignedToName",
-                    ].includes(key) && task.formdata?.[key] !== ""
-                ) // Exclude specific keys and empty values
-                .map((key) => (
-                  <div key={key}>
+              {task.fromform.questions.map((question, index) => {
+                const answer = task.formdata?.[question.question] ?? "";
+
+                return (
+                  <div key={index}>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {key}
+                      {question.question}
                     </label>
                     <input
                       type="text"
-                      value={task.formdata?.[key] ?? ""} // Use optional chaining and provide a fallback value
+                      value={answer}
                       readOnly
                       className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700"
                     />
                   </div>
-                ))}
+                );
+              })}
             </div>
           </div>
         )}
@@ -216,36 +182,36 @@ const TaskDetails: React.FC = () => {
             >
               Update Status
             </label>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => handleStatusChange("Not Started")}
-                className={`px-4 py-2 rounded-md ${
+                className={`w-full sm:w-auto px-5 py-2 rounded-lg font-semibold shadow ${
                   task.status === "Not Started"
                     ? "bg-red-600 text-white"
                     : "bg-red-100 text-red-600"
-                } hover:bg-red-200 transition`}
+                } hover:bg-red-200 transition-all duration-300 ease-in-out`}
                 disabled={updating || task.status === "Not Started"}
               >
                 Not Started
               </button>
               <button
                 onClick={() => handleStatusChange("In Progress")}
-                className={`px-4 py-2 rounded-md ${
+                className={`w-full sm:w-auto px-5 py-2 rounded-lg font-semibold shadow ${
                   task.status === "In Progress"
                     ? "bg-yellow-600 text-white"
                     : "bg-yellow-100 text-yellow-600"
-                } hover:bg-yellow-200 transition`}
+                } hover:bg-yellow-200 transition-all duration-300 ease-in-out`}
                 disabled={updating || task.status === "In Progress"}
               >
                 In Progress
               </button>
               <button
                 onClick={() => handleStatusChange("Completed")}
-                className={`px-4 py-2 rounded-md ${
+                className={`w-full sm:w-auto px-5 py-2 rounded-lg font-semibold shadow ${
                   task.status === "Completed"
                     ? "bg-green-600 text-white"
                     : "bg-green-100 text-green-600"
-                } hover:bg-green-200 transition`}
+                } hover:bg-green-200 transition-all duration-300 ease-in-out`}
                 disabled={updating || task.status === "Completed"}
               >
                 Completed

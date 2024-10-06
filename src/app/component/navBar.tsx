@@ -1,24 +1,20 @@
 "use client";
-import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { VscSignOut } from "react-icons/vsc";
 import { CgProfile } from "react-icons/cg";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { data: session, status } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  console.log(status)
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
+  const pathname = usePathname();
 
-  const handleSignOut = () => {
-    signOut();
-  };
+  // List of paths where NavBar should be empty
+  const excludedPaths = ["/auth/login", "/auth/register"];
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -38,8 +34,22 @@ const NavBar = () => {
     };
   }, []);
 
+  // Conditionally return empty if the pathname is in the excluded paths
+  if (excludedPaths.includes(pathname)) {
+    return <></>;
+  }
+
+  // Rest of the NavBar component
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
-    <div className="p-4 flex justify-between w-full">
+    <div className="p-4 flex justify-between w-full px-4 md:px-20">
       <Link href="/">
         <div className="text-lg font-semibold">MTGTODO</div>
       </Link>
@@ -77,7 +87,6 @@ const NavBar = () => {
               <Link href="/profile" className="w-full">
                 <div className="w-full p-2 text-gray-700 hover:bg-gray-100">
                   <p className="flex gap-2 items-center cursor-pointer ml-20">
-                    {" "}
                     <CgProfile />
                     Profile
                   </p>

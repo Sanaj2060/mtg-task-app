@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { options } from "./api/auth/[...nextauth]/auth";
 import Register from "./auth/register/page";
 import TaskCardWrapper from "./component/taskCardWrapper";
-import NewTaskBtn from "./component/newTaskBtn";
+import NewTaskBtn, { CreateNewForm } from "./component/newTaskBtn";
 import { ViewCreatedTaskBtn } from "./component/newTaskBtn";
 
 export default async function Home() {
@@ -23,16 +23,20 @@ export default async function Home() {
   return (
     <main className="w-full flex flex-col items-center min-h-screen">
       <div className="w-full lg:w-5/6">
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="px-4">
-          <NewTaskBtn />
-          <ViewCreatedTaskBtn />
+          <div className="flex flex-row flex-wrap gap-3">
+            <NewTaskBtn />
+            <ViewCreatedTaskBtn />
+            <CreateNewForm />
+          </div>
+          <hr className="mt-3 mb-3"/>
           <div className="text-2xl font-bold ">
             <h4>Tasks for {session.dbUser?.fullname}</h4>
           </div>
-          <div className="flex flex-col justify-center items-left mt-8">
-          {/* <TaskfilterWrapper /> */}
-          <hr className="mb-3"/>
+          <div className="flex flex-col justify-center items-left">
+            {/* <TaskfilterWrapper /> */}
+            <hr className="mt-3 mb-3"/>
             <TaskCardWrapper id={session.dbUser?.id} where={"home"} />
           </div>
         </div>

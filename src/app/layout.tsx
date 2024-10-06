@@ -5,6 +5,7 @@ import { poppins } from "./ui/fonts";
 import SessionProviderWrapper from "./component/sessionProviderWrapper";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/auth";
+import NavBar from "./component/navBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
+
   return (
     <html lang="en">
       <body className={poppins.className}>
         <SessionProviderWrapper session={session}>
+          <NavBar />
           {children}
         </SessionProviderWrapper>
       </body>

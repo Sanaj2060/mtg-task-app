@@ -1,0 +1,9 @@
+####TO FIX
+1. Order of JSON (form filling) - fixed by rendering the questions from formbyuser and using lookup answer from tasks formdata.
+2. Dynamic form -> If phone use the phone number validator
+3. Design normalisation
+4. Default task to Mateng - Done
+5. email notification
+
+-- Feature enhancement
+1. Show favourite people/business (Dynamic)
