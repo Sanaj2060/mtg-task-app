@@ -1,5 +1,4 @@
 "use client";
-import { Session } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -16,19 +15,6 @@ const NavBar = () => {
 
   // List of paths where NavBar should be empty
   const excludedPaths = ["/auth/login", "/auth/register"];
-
-  // If the current pathname is in the excluded paths, return an empty NavBar
-  if (excludedPaths.includes(pathname)) {
-    return null;
-  }
-
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
-
-  const handleSignOut = () => {
-    signOut();
-  };
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -47,6 +33,20 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Conditionally return empty if the pathname is in the excluded paths
+  if (excludedPaths.includes(pathname)) {
+    return <></>;
+  }
+
+  // Rest of the NavBar component
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+  };
 
   return (
     <div className="p-4 flex justify-between w-full px-4 md:px-20">
@@ -87,7 +87,6 @@ const NavBar = () => {
               <Link href="/profile" className="w-full">
                 <div className="w-full p-2 text-gray-700 hover:bg-gray-100">
                   <p className="flex gap-2 items-center cursor-pointer ml-20">
-                    {" "}
                     <CgProfile />
                     Profile
                   </p>
