@@ -108,7 +108,11 @@ const Page = () => {
                 id="joinedon"
                 className="bg-gray-50 border w-full border-gray-300 p-3 text-gray-900 text-sm rounded-lg"
                 placeholder=""
-                value={session?.dbUser?.joinOn ? session.dbUser.joinOn.toDateString() : 'None'}
+                value={
+                  session?.dbUser?.joinOn
+                    ? session.dbUser.joinOn.toDateString()
+                    : "None"
+                }
               />
             </div>
           </div>

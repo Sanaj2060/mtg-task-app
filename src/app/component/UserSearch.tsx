@@ -100,7 +100,7 @@ const UserSearch = () => {
           {hardCodedUsers.map((user) => (
             <div
               key={user.id}
-              className="bg-yellow-100 flex-grow md:flex-basis-1/4 lg:flex-basis-1/5 bg-white shadow-md rounded cursor-pointer hover:bg-orange-200 flex flex-col items-center justify-center p-4"
+              className="bg-yellow-100 flex-grow md:flex-basis-1/4 lg:flex-basis-1/5 shadow-md rounded cursor-pointer hover:bg-orange-200 flex flex-col items-center justify-center p-4"
               onClick={() => handleUserClick(user)}
             >
               {/* <img

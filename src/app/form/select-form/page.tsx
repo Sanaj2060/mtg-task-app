@@ -1,3 +1,4 @@
+"use client";
 export const revalidate = 0; //disable cached to fetch fresh data everytime
 import { getFormByUserIDSelect } from "@/app/api/lib/db";
 import FormDisplaySelect from "@/app/component/FormDisplaySelect";

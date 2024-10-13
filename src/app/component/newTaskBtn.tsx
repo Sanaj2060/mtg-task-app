@@ -4,15 +4,13 @@ import { FaPlus, FaEye, FaHome, FaWpforms } from "react-icons/fa";
 
 const NewTaskBtn = () => {
   return (
-    <div className="float-right">
-      <Link href={"/form/create-new-task"}>
-        <button
-          className="w-40 md:w-auto flex items-center text-white rounded p-2 sm:p-3 m-3 mr-0 bg-green-700 hover:bg-green-900"
-          title="Create new task"
-        >
-          <FaPlus className="mr-2" />
-          Create new task
-        </button>
+    <div className="flex w-full">
+      <Link
+        href={"/form/create-new-task"}
+        className="w-full flex gap-3 items-center justify-center text-white rounded py-4 px-3 sm:p-3 m-3 bg-green-500 hover:bg-green-600"
+      >
+        <FaPlus className="" />
+        <p>Create task</p>
       </Link>
     </div>
   );
@@ -20,15 +18,13 @@ const NewTaskBtn = () => {
 
 export const ViewCreatedTaskBtn = () => {
   return (
-    <div className="float-right">
-      <Link href={"/tasks/viewcreated"}>
-        <button
-          className="w-40 md:w-auto flex items-center text-white rounded p-2 sm:p-3 m-3 mr-0 bg-blue-700 hover:bg-blue-900"
-          title="View created tasks"
-        >
-          <FaEye className="mr-2" />
-          Tasks you created
-        </button>
+    <div className="w-full flex">
+      <Link
+        href={"/tasks/viewcreated"}
+        className="w-full flex gap-3 items-center justify-center text-white rounded py-4 px-3 sm:p-3 m-3 bg-blue-500 hover:bg-blue-600"
+      >
+        <FaEye className="" />
+        <p>Tasks created</p>
       </Link>
     </div>
   );
@@ -37,14 +33,12 @@ export const ViewCreatedTaskBtn = () => {
 export const GoHome = () => {
   return (
     <div className="float-right">
-      <Link href={"/"}>
-        <button
-          className="w-40 md:w-auto flex items-center text-white rounded p-2 sm:p-3 m-3 mr-0 bg-teal-700 hover:bg-teal-900"
-          title="Go Home"
-        >
-          <FaHome className="mr-2" />
-          Tasks Assigned to You
-        </button>
+      <Link
+        href={"/"}
+        className="w-full flex gap-3 items-center justify-center text-white rounded py-4 px-3 sm:p-3 m-3 bg-yellow-600 hover:bg-yellow-800"
+      >
+        <FaHome className="" />
+        <p>Tasks Assigned to You</p>
       </Link>
     </div>
   );
@@ -52,15 +46,13 @@ export const GoHome = () => {
 
 export const CreateNewForm = () => {
   return (
-    <div className="float-right">
-      <Link href={"/form/create-new-form"}>
-        <button
-          className="w-40 md:w-auto flex items-center text-white rounded p-2 sm:p-3 m-3 mr-0 bg-yellow-600 hover:bg-yellow-800"
-          title="New Form"
-        >
-          <FaWpforms className="mr-2" />
-          Create New Form
-        </button>
+    <div className="w-full flex">
+      <Link
+        href={"/form/create-new-form"}
+        className="w-full gap-3 flex items-center justify-center text-white rounded py-4 px-3 sm:p-3 m-3 bg-orange-500 hover:bg-orange-600"
+      >
+        <FaWpforms className="" />
+        <p>Create Form</p>
       </Link>
     </div>
   );

@@ -22,21 +22,20 @@ export default async function Home() {
 
   return (
     <main className="w-full flex flex-col items-center min-h-screen">
-      <div className="w-full lg:w-5/6">
-        {/* <NavBar /> */}
+      <div className="w-full md:w-4/6">
         <div className="px-4">
-          <div className="flex flex-row flex-wrap gap-3 justify-center">
+          <div className="flex flex-col md:flex-row gap-1 justify-center w-full items-center">
             <NewTaskBtn />
             <ViewCreatedTaskBtn />
             <CreateNewForm />
           </div>
-          <hr className="mt-3 mb-3"/>
+          <hr className="my-3" />
           <div className="text-2xl font-bold ">
             <h4>Tasks for {session.dbUser?.fullname}</h4>
           </div>
           <div className="flex flex-col justify-center items-left">
             {/* <TaskfilterWrapper /> */}
-            <hr className="mt-3 mb-3"/>
+            <hr className="mt-3 mb-3" />
             <TaskCardWrapper id={session.dbUser?.id} where={"home"} />
           </div>
         </div>

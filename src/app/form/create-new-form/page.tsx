@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
-import NavBar from "@/app/component/navBar";
+import { FaCircleCheck } from "react-icons/fa6";
+import { IoMdHome } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 type QuestionType = "text" | "textarea" | "select" | "date" | "phone";
 
@@ -19,8 +21,9 @@ const Form = () => {
   const [questions, setQuestions] = useState<Question[]>([
     { question: "", type: "text", options: [] },
   ]);
-
+  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const createdby = useSession().data?.dbUser?.id;
   console.log(createdby);
@@ -102,12 +105,48 @@ const Form = () => {
       // Optionally handle the error, e.g., show an error message
     } finally {
       setLoading(false);
+      setIsSubmitted(true);
     }
   };
 
+  // Function to handle going back to the homepage
+  const handleGoBackHome = () => {
+    router.push("/"); // Navigate to the home page
+  };
+
+  const handleGoForms = () => {
+    router.push("/form/my-form"); // Navigate to the home page
+  };
+
   return (
-    <main className="w-full flex flex-col items-center min-h-screen">
-      {/* <NavBar /> */}
+    <section className="w-full flex flex-col items-center min-h-screen">
+      {isSubmitted && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 h-full">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center flex-col gap-3 w-3/4 md:w-[500px]">
+            <FaCircleCheck className="w-16 h-16 text-green-500 mb-5" />
+            <p className="text-sm text-center">
+              You have successfully created{" "}
+              <span className="text-gray-500 font-semibold">{title}</span>
+            </p>
+            <p className="text-sm text-center">
+              Click here to view{" "}
+              <span
+                className="text-blue-600 underline cursor-pointer"
+                onClick={handleGoForms}
+              >
+                forms
+              </span>
+            </p>
+            <button
+              className="my-2 flex gap-3 bg-blue-500 text-white py-2 px-4 rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+              onClick={handleGoBackHome}
+            >
+              <IoMdHome className="w-5 h-5" />
+              Back to Home
+            </button>
+          </div>
+        </div>
+      )}
       <form
         onSubmit={handleSubmit}
         className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
@@ -161,7 +200,9 @@ const Form = () => {
                 type="text"
                 placeholder="Question"
                 value={question.question}
-                onChange={(e) => handleChange(index, "question", e.target.value)}
+                onChange={(e) =>
+                  handleChange(index, "question", e.target.value)
+                }
                 className="w-full p-2 border rounded"
                 required
               />
@@ -223,7 +264,7 @@ const Form = () => {
           </button>
         </div>
       </form>
-    </main>
+    </section>
   );
 };
 
